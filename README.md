@@ -5,6 +5,10 @@
 
 This is a [Vivado 2023.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2023-2.html) starter project for the [XCKU15P FPGA](https://www.xilinx.com/products/silicon-devices/fpga/kintex-ultrascale-plus.html) on the [Innova-2 SmartNIC](https://www.nvidia.com/en-us/networking/ethernet/innova-2-flex/) that uses the OpenCAPI connector for PCIe and I2C.
 
+The GTY Transceivers connected to the OpenCAPI Connector are in a column that does not contain the Configuration Block so it is impossible for the FPGA to be programmed within the [100ms PCIe power-up time limit](https://pcisig.com/specifications/ecr_ecn_process?speclib=100+ms).
+
+Motherboard boot must be delayed to allow the FPGA to configure itself before PCIe devices are enumerated. This can be accomplished by toggling the POWER button, then pressing and holding the RESET button for a second before releasing it. Or, [connect a capacitor across the reset pins of an ATX motherboard's Front Panel Header](https://github.com/mwrnd/ATX_Boot_Delay).
+
 Currently testing using a [Second Revision OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe/releases/tag/v0.2-alpha) adapter. PCIe x8 using the OpenCAPI connector works but requires a high quality cable and uses a PCIe Lane to Transceiver Channel ordering that Vivado complains about.
 
 

@@ -49,7 +49,7 @@ set_property OFFCHIP_TERM NONE [get_ports {gpio_io_o_0[0]}]
 
 #
 # OpenCAPI pin constraints are set in this project's compile.tcl file as the
-# current Rev.3 OpenCAPI-to-PCIe Board has reversed Lane-to-Channel ordering:
+# current Rev.2 OpenCAPI-to-PCIe Board has reversed Lane-to-Channel ordering:
 # Lane 0 = Channel X0Y16, Lane 1 = Channel X0Y17, ..., Lane 7 = Channel X0Y23
 # The expected ordering is:
 # Lane 0 = Channel X0Y23, Lane 1 = Channel X0Y22, ..., Lane 7 = Channel X0Y16

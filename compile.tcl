@@ -11,7 +11,7 @@ open_run synth_1
 
 
 
-# Set XDMA PCIe Constraints for OpenCAPI-to-PCIe Rev.3 Board
+# Set XDMA PCIe Constraints for OpenCAPI-to-PCIe Rev.2 Board
 # which has reversed Lane-to-Channel ordering:
 # Lane 0 = Channel X0Y16, Lane 1 = Channel X0Y17, ..., Lane 7 = Channel X0Y23
 # The expected ordering is:
