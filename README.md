@@ -27,10 +27,14 @@ Refer to [this tutorial](https://github.com/mwrnd/notes/tree/main/Vivado_XDMA_DD
 
 ![PCIe XDMA using OpenCAPI Block Diagram](img/innova2_xdma_opencapi_Block_Diagram.png)
 
+An offset is used for `AXI_Lite` to simplify [memory-mapping](https://manpages.ubuntu.com/manpages/focal/en/man2/mmap.2.html) the IIC (I2C) Block.
+
+![PCIe-to-AXI Translation Offset](img/PCIe-AXI_Translation.png)
 
 
 
-# AXI Addresses
+
+## AXI Addresses
 
 | Block                      | Address (Hex) | Size   |
 | -------------------------- |:-------------:| :----: |
@@ -87,7 +91,7 @@ Using an [SFPCables.com SFF-8654 to SFF-8654 8i](https://www.sfpcables.com/24g-i
 
 ![lspci Link Status](img/lspci_XDMA_OpenCAPI_x8_with_SlimSAS_SFF-8654_8i_85Ohm_Cable.png)
 
-A third revision of the [OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe) is currently being designed to improve signal integrity and reorder the PCIe Lane to Transceiver Channel ordering and avoid Vivado warnings.
+A third revision of the [OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe) is currently being designed to improve signal integrity and reorder the PCIe Lane to Transceiver Channel ordering to avoid Vivado warnings.
 
 ![Vivado Critical Warning about Lane Ordering](img/Overriding_Physical_Property_Critical_Warning_Message.png)
 
