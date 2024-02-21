@@ -52,7 +52,6 @@ Refer to the [`innova2_flex_xcku15p_notes`](https://github.com/mwrnd/innova2_fle
 wget https://github.com/mwrnd/innova2_xdma_opencapi/releases/download/v0.1/innova2_xdma_opencapi_bitstream.zip
 unzip innova2_xdma_opencapi_bitstream.zip
 sha256sum *bin
-echo a7d503c692122630295ae6a43a6c2a491b1c6a6b1e5682d6acc68ad1545fe892 should be Checksum of innova2_xdma_opencapi.bit
 echo 4b95eea589159197ab7c973038cfea28e6a4fe04385a92a70a736d428d8ab882 should be Checksum of innova2_xdma_opencapi_primary.bin
 echo f22c0fefabcf8eb9ced863bf11f3b252b336faa0f2778f6cac1588dd74e08daf should be Checksum of innova2_xdma_opencapi_secondary.bin
 ```
