@@ -10,16 +10,9 @@ Motherboard boot must be delayed to allow the FPGA to configure itself before PC
 
 ![Delay Boot Using Front Panel Header Capacitor](img/Delay_Boot_Using_FrontPanelHeader_Capacitor.jpg)
 
-Currently testing using a [Second Revision OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe/releases/tag/v0.2-alpha) adapter. PCIe x8 using the OpenCAPI connector works but requires a high quality cable and uses a PCIe Lane to Transceiver Channel ordering that Vivado complains about.
+Currently testing using a [Second Revision OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe/releases/tag/v0.2-alpha) adapter. PCIe x8 using the OpenCAPI connector works but requires a high quality cable and uses a [PCIe Lane to Transceiver Channel ordering](compile.tcl#L20) that Vivado complains about.
 
 ![Vivado Critical Warning](img/Overriding_Physical_Property_Critical_Warning_Message.png)
-
-
-
-
-## Program the Design into the XCKU15P Configuration Memory
-
-Refer to the [innova2_flex_xcku15p_notes](https://github.com/mwrnd/innova2_flex_xcku15p_notes/?tab=readme-ov-file#loading-a-user-image) project for instructions on setting up an Innova-2 system with all drivers including [Xilinx's PCIe XDMA Drivers](https://github.com/Xilinx/dma_ip_drivers).
 
 Refer to [this tutorial](https://github.com/mwrnd/notes/tree/main/Vivado_XDMA_DDR4_Tutorial) for detailed instructions on generating a similar project from scratch.
 
@@ -53,10 +46,15 @@ An offset is used for `AXI_Lite` to simplify [memory-mapping](https://manpages.u
 
 ## Program the Design into the XCKU15P Configuration Memory
 
-Refer to the [`innova2_flex_xcku15p_notes`](https://github.com/mwrnd/innova2_flex_xcku15p_notes) project's instructions on [Loading a User Image](https://github.com/mwrnd/innova2_flex_xcku15p_notes/#loading-a-user-image). Binary Memory Configuration Bitstream Files are included in this project's [Releases](https://github.com/mwrnd/innova2_8gb_adlt_xdma_ddr4_demo/releases).
+Refer to the [`innova2_flex_xcku15p_notes`](https://github.com/mwrnd/innova2_flex_xcku15p_notes) project's instructions on [Loading a User Image](https://github.com/mwrnd/innova2_flex_xcku15p_notes/#loading-a-user-image). Binary Memory Configuration Bitstream Files are included in this project's [Releases](https://github.com/mwrnd/innova2_xdma_opencapi/releases).
 
 ```
-TODO
+wget https://github.com/mwrnd/innova2_xdma_opencapi/releases/download/v0.1/innova2_xdma_opencapi_bitstream.zip
+unzip innova2_xdma_opencapi_bitstream.zip
+sha256sum *bin
+echo a7d503c692122630295ae6a43a6c2a491b1c6a6b1e5682d6acc68ad1545fe892 should be Checksum of innova2_xdma_opencapi.bit
+echo 4b95eea589159197ab7c973038cfea28e6a4fe04385a92a70a736d428d8ab882 should be Checksum of innova2_xdma_opencapi_primary.bin
+echo f22c0fefabcf8eb9ced863bf11f3b252b336faa0f2778f6cac1588dd74e08daf should be Checksum of innova2_xdma_opencapi_secondary.bin
 ```
 
 
@@ -66,7 +64,7 @@ TODO
 
 ### lspci
 
-After programming the bitstream and rebooting, the design should show up as `Memory controller: Xilinx Corporation Device 9038` under [lspci](https://manpages.ubuntu.com/manpages/jammy/man8/lspci.8.html). It shows up at PCIe Bus Address `01:00` for me.
+After programming the bitstream and rebooting, the design should show up as `Memory controller: Xilinx Corporation Device 9038` under [lspci](https://manpages.ubuntu.com/manpages/jammy/man8/lspci.8.html). It shows up at PCIe Bus Address `01:00` for me but this depends on the PCIe connector you plug your board into.
 ```
 sudo lspci -tv | grep -i "Mellanox\|0000\|Xilinx\|1d"
 ```
