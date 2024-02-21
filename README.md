@@ -127,7 +127,7 @@ sudo ./innova2_xdma_opencapi_iic_tc74_test
 
 ![Read TC74 Registers](img/xdma_opencapi_TC74_test.png)
 
-After the spraying the sensor with some [Freeze Spray](https://mgchemicals.com/products/electronics-maintenance/freeze-spray-electronics/cooling-spray-electronics/) the temperature drops to below 0C. The data is in [2's-complement format](https://en.wikipedia.org/wiki/Two%27s_complement).
+After spraying the sensor with some [Freeze Spray](https://mgchemicals.com/products/electronics-maintenance/freeze-spray-electronics/cooling-spray-electronics/) the temperature drops to below 0C. The data is in [2's-complement format](https://en.wikipedia.org/wiki/Two%27s_complement).
 
 ![After using Freeze Spray](img/xdma_opencapi_TC74_after_Super_Cold_Spray.png)
 
