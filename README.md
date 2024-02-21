@@ -1,15 +1,18 @@
-**Work-In-Progress**
-
-
 # Innova2 XDMA OpenCAPI
 
-This is a [Vivado 2023.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2023-2.html) starter project for the [XCKU15P FPGA](https://www.xilinx.com/products/silicon-devices/fpga/kintex-ultrascale-plus.html) on the [Innova-2 SmartNIC](https://www.nvidia.com/en-us/networking/ethernet/innova-2-flex/) that uses the OpenCAPI connector for PCIe and I2C.
+This is a [Vivado 2023.2](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/2023-2.html) starter project for the [XCKU15P FPGA](https://www.xilinx.com/products/silicon-devices/fpga/kintex-ultrascale-plus.html) on the [Innova-2 SmartNIC MNV303212A-ADLT](https://www.nvidia.com/en-us/networking/ethernet/innova-2-flex/) that uses the OpenCAPI connector for PCIe and I2C.
 
 The GTY Transceivers connected to the OpenCAPI Connector are in a column that does not contain the Configuration Block so it is impossible for the FPGA to be programmed within the [100ms PCIe power-up time limit](https://pcisig.com/specifications/ecr_ecn_process?speclib=100+ms).
 
+![XCKU15P FFVE1517 Bank Diagram.png](img/XCKU15P_FFVE1517_Bank_Diagram.png)
+
 Motherboard boot must be delayed to allow the FPGA to configure itself before PCIe devices are enumerated. This can be accomplished by toggling the POWER button, then pressing and holding the RESET button for a second before releasing it. Or, [connect a capacitor across the reset pins of an ATX motherboard's Front Panel Header](https://github.com/mwrnd/ATX_Boot_Delay).
 
+![Delay Boot Using Front Panel Header Capacitor](img/Delay_Boot_Using_FrontPanelHeader_Capacitor.jpg)
+
 Currently testing using a [Second Revision OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe/releases/tag/v0.2-alpha) adapter. PCIe x8 using the OpenCAPI connector works but requires a high quality cable and uses a PCIe Lane to Transceiver Channel ordering that Vivado complains about.
+
+![Vivado Critical Warning](img/Overriding_Physical_Property_Critical_Warning_Message.png)
 
 
 
@@ -83,17 +86,23 @@ Using a [3M 8ES8-1DF21-0.75](https://www.trustedparts.com/en/search/8ES8-1DF21-0
 
 ### PCIe Link Status versus Cable
 
-Using a [3M 8ES8-1DF21-0.75](https://www.trustedparts.com/en/search/8ES8-1DF21-0.75) cable and a [Second Revision OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe/releases/tag/v0.2-alpha) adapter the PCIe Link Status is usually excellent:
+Using a [3M 8ES8-1DF21-0.75](https://www.trustedparts.com/en/search/8ES8-1DF21-0.75) cable:
+
+![System with 3M 8ES8-1DF21-0.75 Cable](img/innova2_xdma_opencapi_with_3M_8ES8-1DF21-0.75_Cable.jpg)
+
+PCIe Link Status is usually excellent:
 
 ![lspci Link Status](img/lspci_XDMA_OpenCAPI_x8_with_3M_8ES8-1DF21-0.75_Cable.png)
 
-Using an [SFPCables.com SFF-8654 to SFF-8654 8i](https://www.sfpcables.com/24g-internal-slimsas-sff-8654-to-sff-8654-8i-cable-straight-to-90-degree-left-angle-8x-12-sas-4-0-85-ohm-0-5-1-meter) cable and a [Second Revision OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe/releases/tag/v0.2-alpha) adapter the PCIe Link Status is downgraded:
+Using an [SFPCables.com SFF-8654 to SFF-8654 8i](https://www.sfpcables.com/24g-internal-slimsas-sff-8654-to-sff-8654-8i-cable-straight-to-90-degree-left-angle-8x-12-sas-4-0-85-ohm-0-5-1-meter) cable:
+
+![System with SFPCables SFF-8654 8i 85Ohm Cable](img/innova2_xdma_opencapi_with_SlimSAS_SFF-8654_8i_85Ohm_Cable.jpg)
+
+PCIe Link Status is downgraded:
 
 ![lspci Link Status](img/lspci_XDMA_OpenCAPI_x8_with_SlimSAS_SFF-8654_8i_85Ohm_Cable.png)
 
-A third revision of the [OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe) is currently being designed to improve signal integrity and reorder the PCIe Lane to Transceiver Channel ordering to avoid Vivado warnings.
-
-![Vivado Critical Warning about Lane Ordering](img/Overriding_Physical_Property_Critical_Warning_Message.png)
+I am working on a third revision of the OpenCAPI-to-PCIe adapter to improve signal integrity.
 
 
 
@@ -101,6 +110,14 @@ A third revision of the [OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-
 ### OpenCAPI I2C over XDMA
 
 The [OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe) adapter routes the OpenCAPI I2C signals to an external connector which has the same pin ordering as a [TC74 Temperature Sensor](https://www.microchip.com/en-us/product/tc74). [`innova2_xdma_opencapi_iic_tc74_test.c`](innova2_xdma_opencapi_iic_tc74_test.c) is a simple program to read the temperature and configuration registers of the sensor. Refer to these notes on [AXI IIC (I2C) over XDMA](https://github.com/mwrnd/notes/tree/main/embeddedsw_AXI_IIC_over_XDMA) for more information.
+
+![TC74A0-3.3VAT Being Tested in a System](img/TC74A0-3.3VAT_in_OpenCAPI-to-PCIe_Adapter_In-System.jpg)
+
+Compile and run the TC74 test program:
+```
+make
+sudo ./innova2_xdma_opencapi_iic_tc74_test
+```
 
 ![Read TC74 Registers](img/xdma_opencapi_TC74_test.png)
 
