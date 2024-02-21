@@ -72,6 +72,9 @@ sudo lspci -tv | grep -i "Mellanox\|0000\|Xilinx\|1d"
 ![lspci Tree and Xilinx Devices](img/lspci_tvv_XDMA_OpenCAPI.png)
 
 Using a [3M 8ES8-1DF21-0.75](https://www.trustedparts.com/en/search/8ES8-1DF21-0.75) cable and a [Second Revision OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe/releases/tag/v0.2-alpha) adapter the PCIe Link Status is usually excellent:
+```
+sudo lspci -v -d 10ee: ; sudo lspci -vvv -d 10ee: | grep LnkSta
+```
 
 ![lspci Link Status](img/lspci_XDMA_OpenCAPI_x8_with_3M_8ES8-1DF21-0.75_Cable.png)
 
