@@ -109,13 +109,15 @@ I am working on a third revision of the OpenCAPI-to-PCIe adapter to improve sign
 
 ### OpenCAPI I2C over XDMA
 
-The [OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe) adapter routes the OpenCAPI I2C signals to an external connector which has the same pin ordering as a [TC74 Temperature Sensor](https://www.microchip.com/en-us/product/tc74).
+The [OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe) adapter routes the OpenCAPI I2C signals to an external connector which has the same pin ordering as a [TC74 Temperature Sensor](https://www.microchip.com/en-us/product/tc74). Note 3.3V is from the PCIe connector.
 
 ![TC74A0-3.3VAT in OpenCAPI-to-PCIe Adapter](img/TC74A0-3.3VAT_in_OpenCAPI-to-PCIe_Adapter.jpg)
 
-[`innova2_xdma_opencapi_iic_tc74_test.c`](innova2_xdma_opencapi_iic_tc74_test.c) is a simple program to read the temperature and configuration registers of the sensor. Refer to these notes on [AXI IIC (I2C) over XDMA](https://github.com/mwrnd/notes/tree/main/embeddedsw_AXI_IIC_over_XDMA) for more information.
+Complete system:
 
 ![TC74A0-3.3VAT Being Tested in a System](img/TC74A0-3.3VAT_in_OpenCAPI-to-PCIe_Adapter_In-System.jpg)
+
+[`innova2_xdma_opencapi_iic_tc74_test.c`](innova2_xdma_opencapi_iic_tc74_test.c) is a simple program to read the temperature and configuration registers of the sensor. Refer to these notes on [AXI IIC (I2C) over XDMA](https://github.com/mwrnd/notes/tree/main/embeddedsw_AXI_IIC_over_XDMA) for more information.
 
 Compile and run the TC74 test program:
 ```
