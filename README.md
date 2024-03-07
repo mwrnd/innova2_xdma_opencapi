@@ -16,6 +16,8 @@ Currently testing using a [Second Revision OpenCAPI-to-PCIe](https://github.com/
 
 Refer to [this tutorial](https://github.com/mwrnd/notes/tree/main/Vivado_XDMA_DDR4_Tutorial) for detailed instructions on generating a similar project from scratch.
 
+Related Projects: [OpenCAPI-to-PCIe](https://github.com/mwrnd/OpenCAPI-to-PCIe), [OpenCAPI_Breakout](https://github.com/mwrnd/OpenCAPI_Breakout), [PCIe_x8_Breakout](https://github.com/mwrnd/PCIe_x8_Breakout).
+
 
 
 
