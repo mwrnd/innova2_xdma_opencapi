@@ -36,7 +36,11 @@ Run with:
 
 // The PCIe to AXI Translation Offset for the PCIe to AXI Lite Interface
 #define XDMA_PCIe_to_AXI_Translation_Offset 0x40000000
+
+// 4K is the default page size for virtual memory management but it can be up 
+// to 64K on some platforms and 64K is the default size assigned by Vivado
 #define AXI_IIC_SIZE 65536
+
 // The AXI IIC Block Address from the Vivado Block Diagram Address Editor
 #define AXI_IIC_ADDRESS 0x40060000
 #define AXI_IIC_ADDRESS_ADJUSTED (AXI_IIC_ADDRESS - XDMA_PCIe_to_AXI_Translation_Offset)
